@@ -1,23 +1,22 @@
 function prepset = L2HEPrep_settings_TEMPLATE
 
   %  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %  % GENERAL DESCRIPTION                                                  %
-  %  %   Preparatory script that generates canopy height models and calls
-  %  % associated R script that computes canopy maxima and assoicated
-  %  % information for input into L2HEval. 
-  %  %                                                                      %  
-  %  % REQUIREMENTS
-  %  %   Functionality is currently written for Windows 10, but should work
-  %  % on Windows 7. LASTools is written for Windows using .exe commands,
-  %  % which will not run through Linux or OSX systems. Installation of
-  %  % 'wine' would enable running of these commands on non-Windows
-  %  % systems, but changes must be made below. Contact author for more
-  %  % info if required. 
-  %  %                                                                      %
-  %  % VERSION   
-  %  %
-  %  % AUTHORS                                                              %
-  %  %   C. Webster 
+  %  %  GENERAL DESCRIPTION                                                  
+  %  %     Preparatory script that generates canopy height models and calls
+  %  %    associated R script that computes canopy maxima and assoicated
+  %  %    information for input into L2HEval. 
+  %  %                                                                         
+  %  %  REQUIREMENTS
+  %  %     Functionality is currently written for Windows 10, but should work
+  %  %    on Windows 7. LASTools is written for Windows using .exe commands,
+  %  %    which will not run through Linux or OSX systems. Installation of
+  %  %    'wine' would enable running of these commands on non-Windows
+  %  %    systems, but changes must be made below. Contact author for more
+  %  %    info if required. 
+  %  %                                                                      
+  %  %   Created by C.Webster @ WSL/SLF
+  %  %                                                                      
+  %  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -128,10 +127,11 @@ prepset.in.species          = 'NS';
 %   classifying branch points. Various studies have presented measured and
 %   modelled branch angle data for certain species. So far the species
 %   supported are: 
-% 'NS' : Norway Spruce
-% 'DF' : Douglas Fir
-% 'SP' : Scot Pine
-% 'SB' : Silver Birch
+% 'NS' : Norway Spruce (Colin and Houllier, 1992, Ann Sci For. 49, 511-538;
+%          Maekinen and Hein, 2006 Eur J Forest Res 125: 239–248)
+% 'DF' : Douglas Fir (Hein et al., 2008, Forest Ecology and Management 256 (2008) 1064–1079)
+% 'SP' : Scots Pine (Maekinen et al., 1998, Can. J. For. Res. 28: 1686–1696)
+% 'SB' : Silver Birch (Maekinen et al. 2003, Forest Science 49(2))
 % 'NA' : Uses horizontal branches
 % If a forest is mixed, it is recommended the most common species is
 %   selected. 
@@ -155,9 +155,7 @@ prepset.in.epsgstr        = '2056';
 %   the bounds of the calculated trunks. For faster calculation, trunk
 %   coordinates are put into a spatial points dataframe, which requires the
 %   EPSG number of the coordinate reference system of the lidar dataset. 
-% e.g sample dataset is Swiss grid 1903 (epsg = '2506'). If coordinates are
-%   in UTM, the epsg code of the UTM zone must be specified e.g. UTM zone
-%   32N (epsg = '32632'). 
+% e.g sample dataset is Swiss grid 1903 (epsg = '2506').
 % Set to '0000' to avoid requirement for epsg number - this will not remove
 %   points that lie within tree trunk bounds. 
 

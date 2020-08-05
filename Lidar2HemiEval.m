@@ -1,69 +1,53 @@
 function Lidar2HemiEval(sfile)
 
-  %  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  %  % GENERAL DESCRIPTION                                                  %
-  %  %   This scripts creates synthethic hemispherical images from high
-  %  %   resolution LiDAR point cloud data of forest canopy and computes
-  %  %   sky-view fraction and direct/diffuse/total incoming shortwave
-  %  %   radiation for a given temporal resolution and time period.
+  %  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %  % GENERAL DESCRIPTION                                                  
+  %  %    This scripts creates synthethic hemispherical images from high     
+  %  %   resolution LiDAR point cloud data of forest canopy and computes    
+  %  %   sky-view fraction and direct/diffuse/total incoming shortwave      
+  %  %   radiation for a given temporal resolution and time period.         
+  %  %                                                                      
+  %  %    Depending on usage, preparations may be required using L2HE_Prep.m 
+  %  %   and L2HEPrep_Settings.m                                          
+  %  %                                                                      
+  %  % VERSION                                                              
+  %  %    This is a first complete version of L2HEval to be referenced as    
+  %  %   vs 1.0 | created 2018/08 | last modified on 2020/07/06             
+  %  %                                                                      
+  %  % AUTHORS                                                              
+  %  %   C. Webster (1,2), T. Jonas(1)                                      
+  %  %    (1) WSL Institute for Snow and Avalanche Research SLF, Davos, CH  
+  %  %   Shortwave radiation function written by T. Jonas for HPEval and    
+  %  %     edited here for synthetic hemispheric images.                    
+  %  %    (2) University of Edinburgh, School of GeoSciences, Edinburgh, UK 
+  %  %                                                                      
+  %  % CONTRIBUTING MATERIAL                                                
+  %  %   - solar position calculations from NOAA, found online at           
+  %  %     www.esrl.noaa.gov/gmd/grad/solcalc/calcdetails.html              
+  %  %     (accessed 2018/06)                                               
+  %  %   - function to split solar radiation into direct/diffuse component  
+  %  %     as in the factorial snow model FSM 1.0 by R. Essery              
+  %  %     available at www.geosci-model-dev.net/8/3867/2015                
+  %  %     (accessed 2018/06)                                               
+  %  %   - function to convert UTM into WGS84 coordinates, found online at  
+  %  %     www.mathworks.com/matlabcentral/fileexchange/44242-utm2lonlat    
+  %  %     (accessed 2018/08)                                               
   %  %
-  %  %   Depending on usage, preparations may be required using L2HE_Prep.m
-  %  %     and L2HEPrep_Settings.m
-  %  %                                                                      %
-  %  % VERSION                                                              %
-  %  %   This is a first complete version of L2HEval to be referenced as    %
-  %  %   vs 1.0 | created 2018/08 | last modified on 2018/10/03             %
-  %  %                                                                      %
-  %  % AUTHORS                                                              %
-  %  %   C. Webster (1,2), T. Jonas(1)
-  %  %    (1) WSL Institute for Snow and Avalanche Research SLF, Davos, CH  %
-  %  %   Shortwave radiation function written by T. Jonas for HPEval and
-  %  %     edited here for synthetic hemispheric images.
-  %  %    (2) University of Edinburgh, School of GeoSciences, Edinburgh, UK %
-  %  %                                                                      %
-  %  % CONTRIBUTING MATERIAL                                                %
-  %  %   - solar position calculations from NOAA, found online at           %
-  %  %     www.esrl.noaa.gov/gmd/grad/solcalc/calcdetails.html              %
-  %  %     (accessed 2018/06)                                               %
-  %  %   - function to split solar radiation into direct/diffuse component  %
-  %  %     as in the factorial snow model FSM 1.0 by R. Essery              %
-  %  %     available at www.geosci-model-dev.net/8/3867/2015                %
-  %  %     (accessed 2018/06)                                               %
-  %  %   - function to convert UTM into WGS84 coordinates, found online at  %
-  %  %     www.mathworks.com/matlabcentral/fileexchange/44242-utm2lonlat    %
-  %  %     (accessed 2018/08)
-  %  %   - lasdata from file exchange
-  %  %                                                                      %
-  %  % TEST DATASET                                                         %
-  %  %   - DEM at 50 m spatial resolution, derived from TopoSwiss data      %
-  %  %     available for research; by TopoSwiss                             %
-  
-  
-  %  %                                                                      %
-  %  % OUTPUT                                                               %
-  %  %   The script has a number of optional outputs, which include         %
-  %  %   - output binarised matrix of synthetic image and given resolution  %
-  %  %   - direct/diffuse/total shortwave radiation (per horizontal,
-  %  %       inclined, sun-facing area) and canopy transmissivity along the
-  %  %       solar track
-  %  %   - sky view fraction for flat and/or hemispherical sensor)         %
-  %  %                                                                      %
-  %  % METHODS                                                              %
-  %  %   The scripts includes the following steps (some of them being       %
-  %  %   optional):                                                         %
-  
-  %  %                                                                      %
-  %  % SETTINGS                                                             %
-  %  %   All settings such as paths to I/O data and model parameters are    %
-  %  %   handled through an external settings file the path/filename of     %
-  %  %   which is the only input argument to this script                    %
-  %  %                                                                      %
-  
-  %  % USAGE                                                                %
-  %  %   > L2HEval('L2HEval_Settings.m') for single process                 % 
-  %  %   > For calibration, use 'L2HE_MarkerSizeCalibration.m'
-  
-  %  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  %  % REQUIREMENTS                                                         
+  %  %   - file structure and input files are formatted and initiated in    
+  %  %     Lidar2HemiEval_Prep.m                                            
+  %  %   - lasdata from file exchange required in file path                 
+  %  %     (mathworks.com/matlabcentral/fileexchange/48073-lasdata)         
+  %  %                                                                      
+  %  % SETTINGS                                                             
+  %  %    All settings such as paths to I/O data and model parameters are    
+  %  %   handled through an external settings file the path/filename of     
+  %  %   which is the only input argument to this script                    
+  %  %                                                                      
+  %  % USAGE                                                                
+  %  %   > L2HEval('L2HEval_Settings.m') for single process                  
+  %  %  
+  %  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 tic

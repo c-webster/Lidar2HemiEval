@@ -2,7 +2,7 @@
 #####
 # This is the R script that is associated with the matlab script 'Lidar2HemiEval_Prep.m'
 
-# Input is given through running L2HE_Prep
+# Input is given through running Lidar2HemiEval.m from Matlab.
 
 # This script is hard coded and should not be changed.
 
@@ -54,7 +54,8 @@ FindTreesCHM <- function(chm, fws, minht) {
   return(treeList)
   
 } # end of FindTreesCHM
-
+# FindTreesCHM function taken from blog post by Andrew Sanchez Meador:
+# (http://quantitativeecology.org/using-rlidar-and-fusion-to-delineate-individual-trees-through-canopy-height-model-segmentation/)
 
 SegmentCan <- function(chmf,imout){
   

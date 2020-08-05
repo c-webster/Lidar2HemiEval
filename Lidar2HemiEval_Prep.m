@@ -1,21 +1,27 @@
 function Lidar2HemiEval_Prep(sfile)
 
-%  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  % GENERAL DESCRIPTION                                                  %
-%  %   Preparatory script that generates canopy height models 
-%  %                                                                      %
-%  % VERSION                                                              %
-%  %   v1.0 updated 06.07.2020                                            %
-%  %   
-%  % AUTHOR:                                                              %
-%  %   Clare Webster  (1,2)
-%  %    (1) WSL Institute for Snow and Avalanche Research SLF, Davos, CH  %
-%  %    (2) University of Edinburgh, School of GeoSciences, Edinburgh, UK %
-
-%  % USAGE
-%  %   > Lidar2HemiEval_Prep('L2HEPrep_settings.m')
-
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %  % GENERAL DESCRIPTION                                                  
+ %  %   Preparatory script that generates canopy height models and gathers
+ %  %   input and runs L2HE_Prep_R.R
+ %  %                                                                      
+ %  % VERSION
+ %  %   v1.0 updated 06.07.2020                                           
+ %  %   
+ %  % AUTHOR:                                                              
+ %  %   Clare Webster  (1,2)
+ %  %    (1) WSL Institute for Snow and Avalanche Research SLF, Davos, CH  
+ %  %    (2) University of Edinburgh, School of GeoSciences, Edinburgh, UK 
+ %  %
+ %  % CONTRIBUTING MATERIAL                                                
+ %  %    Calculation of canopy height models follows 
+ %  %    'generating_a_pit_free_chm.bat' from LAStools, based on 
+ %  %    http://www.riegl.com/uploads/tx_pxpriegldownloads/khosravipour_SilviLaser2013.pdf
+ %  %    
+ %  % USAGE
+ %  %   > Lidar2HemiEval_Prep('L2HEPrep_settings.m')
+ %  % 
+ %  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   %% LOAD SETTINGS
   if nargin == 0

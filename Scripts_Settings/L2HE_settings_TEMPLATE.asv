@@ -2,15 +2,15 @@ function l2heset = L2HE_settings_TEMPLATE
 
 %  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %  % GENERAL DESCRIPTION                                                  
-  %  %    L2HE_Settings defines setting for L2HEval, which is a 
-  %  %   tool to generate synthetic hemispherical images from point cloud
-  %  %   data of a forest canopy. Sky-view fraction and below-canopy incoming
-  %  %   shortwave radiation can also be calculated from each of these
-  %  %   synthetic images. 
+  %  %   L2HE_Settings defines setting for L2HEval, which is a 
+  %  %    tool to generate synthetic hemispherical images from point cloud
+  %  %     data of a forest canopy. Sky-view fraction and below-canopy incoming
+  %  %     shortwave radiation can also be calculated from each of these
+  %  %     synthetic images. 
   %  %  
   %  %   Created by C.Webster @ WSL/SLF
-  %  %                                                                      
-  %  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+  %  %                                                                      %
+  %  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %
 
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   %% version of settings file
