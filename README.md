@@ -1,4 +1,8 @@
-Lidar2HemiEval
+
+Note: A more efficient and flexible version of this code is available as L2R/las2rad in the [CanRad](https://github.com/c-webster/CanRad.jl) julia package
+
+
+## Lidar2HemiEval
 
 Three companion scripts that together:
 	1. Enhances airborne LiDAR data of forests to include opague trunks and increase tree crown density
